@@ -47,13 +47,13 @@ public class Jeep {
         }
     }
     
-    public String slowSpeed() throws Exception
+    public String onSpeed() throws Exception
     {
         if (engine != null)
         {
             try
             {
-                int speed = engine.SlowSpeed();
+                int speed = engine.onSpeed();
                 return "{ " + 
                        "\"speed\" : " + speed +
                        " }";
@@ -68,69 +68,7 @@ public class Jeep {
         }
     }
     
-    public String mediumSpeed() throws Exception
-    {
-        if (engine != null)
-        {
-            try
-            {
-                int speed = engine.MediumSpeed();
-                return "{ " + 
-                       "\"speed\" : " + speed +
-                       " }";
-            }
-            catch (Exception exc)
-            {
-                throw new Exception(exc.getMessage());
-            }
-        }
-        else {
-            throw new Exception("Engine initialization error");
-        }
-    }
-    
-    public String fastSpeed() throws Exception
-    {
-        if (engine != null)
-        {
-            try
-            {
-                int speed = engine.FastSpeed();
-                return "{ " + 
-                       "\"speed\" : " + speed +
-                       " }";
-            }
-            catch (Exception exc)
-            {
-                throw new Exception(exc.getMessage());
-            }
-        }
-        else {
-            throw new Exception("Engine initialization error");
-        }
-    }
-    
-    public String FullSpeed() throws Exception
-    {
-        if (engine != null)
-        {
-            try
-            {
-                int speed = engine.FullSpeed();
-                return "{ " + 
-                       "\"speed\" : " + speed +
-                       " }";
-            }
-            catch (Exception exc)
-            {
-                throw new Exception(exc.getMessage());
-            }
-        }
-        else {
-            throw new Exception("Engine initialization error");
-        }
-    }
-    
+
     public String stop() throws Exception
     {
         if (engine != null)

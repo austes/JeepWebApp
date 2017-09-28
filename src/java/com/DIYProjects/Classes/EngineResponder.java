@@ -266,7 +266,6 @@ public class EngineResponder implements EngineListener {
         rearLeftPIN3.setState(PinState.LOW);
         frontRightPIN3.setState(PinState.HIGH);
         rearRightPIN3.setState(PinState.HIGH);
-        
         frontRightPIN3.setPwm(20);
         reareRightPIN3.setPwm(20);
 

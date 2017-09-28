@@ -40,45 +40,16 @@ public class Engine {
             throw new Exception("EngineListener error");
     }
     
-    public int SlowSpeed() throws Exception
+    public int OnSpeed() throws Exception
     {
         if (listener != null) {
-            int speed = listener.onSlowSpeed();
+            int speed = listener.onSpeed();
             return speed;
         }
         else
             throw new Exception("EngineListener error");
     }
-    
-    public int MediumSpeed() throws Exception
-    {
-        if (listener != null) {
-            int speed = listener.onMediumSpeed();
-            return speed;
-        }
-        else
-            throw new Exception("EngineListener error");
-    }
-    
-    public int FastSpeed() throws Exception
-    {
-        if (listener != null) {
-            int speed = listener.onFastSpeed();
-            return speed;
-        }
-        else
-            throw new Exception("EngineListener error");
-    }
-    
-    public int FullSpeed() throws Exception
-    {
-        if (listener != null) {
-            int speed = listener.onFullSpeed();
-            return speed;
-        }
-        else
-            throw new Exception("EngineListener error");
-    }
+
     
     public void Backward()
     {

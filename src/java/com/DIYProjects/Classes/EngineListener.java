@@ -7,8 +7,6 @@ public interface EngineListener {
     int onSpeedUp();
     void onBackwards();
     void onForward();
-    int onSlowSpeed();
-    int onMediumSpeed();
-    int onFastSpeed();
-    int onFullSpeed();
+    int onSpeed();
+
 }
