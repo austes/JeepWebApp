@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.DIYProjects.Classes;
 
 import com.pi4j.io.gpio.*;
-/**
- *
- * @author Mindaugas Liogys
- */
+
 public class EngineResponder implements EngineListener {
     
     private int speed = 0;
@@ -43,8 +36,6 @@ public class EngineResponder implements EngineListener {
             {
                 assignPinsToFrontAxis(frontAxisPins);
                 com.pi4j.wiringpi.Gpio.pwmSetMode(com.pi4j.wiringpi.Gpio.PWM_MODE_MS);
-                //com.pi4j.wiringpi.Gpio.pwmSetRange(1000);
-                //com.pi4j.wiringpi.Gpio.pwmSetClock(500);
                 
                 if (rearAxisPins != null)
                 {
@@ -52,10 +43,6 @@ public class EngineResponder implements EngineListener {
                     {
                         assignPinsToRearAxis(rearAxisPins);
                         drivenAxis = DrivenAxis.ALL;
-                        //engineRunner = new EngineRunner(
-                        //        new GpioPinDigitalOutput[] { frontLeftPIN1, frontLeftPIN2, frontLeftPIN3, frontRightPIN1, frontRightPIN2, frontRightPIN3 },
-                         //       new GpioPinDigitalOutput[] { rearLeftPIN1, rearLeftPIN2, rearLeftPIN3, rearRightPIN1, rearRightPIN2, rearRightPIN3 }
-                        //);
                     }
                     else
                         throw new Exception("REAR: Illegal number of pins");
@@ -63,9 +50,6 @@ public class EngineResponder implements EngineListener {
                 else
                 {
                     drivenAxis = DrivenAxis.FRONT;
-                    //engineRunner = new EngineRunner(
-                    //    new GpioPinDigitalOutput[] { frontLeftPIN1, frontLeftPIN2, frontLeftPIN3, frontRightPIN1, frontRightPIN2, frontRightPIN3 },
-                    //    drivenAxis);
                 }
             }
             else
@@ -79,9 +63,6 @@ public class EngineResponder implements EngineListener {
                 {
                     assignPinsToRearAxis(rearAxisPins);
                     drivenAxis = DrivenAxis.REAR;
-                    //engineRunner = new EngineRunner(
-                    //    new GpioPinDigitalOutput[] { rearLeftPIN1, rearLeftPIN2, rearLeftPIN3, rearRightPIN1, rearRightPIN2, rearRightPIN3 },
-                    //    drivenAxis);
                 }
                 else
                     throw new Exception("REAR: Illegal number of pins");           
@@ -89,22 +70,17 @@ public class EngineResponder implements EngineListener {
             else
                 throw new Exception("FRONT + REAR: No pins assigned");
         }
-        //engineRunner.start();
     }
     
     private void assignPinsToFrontAxis(int[] frontAxisPins)
     {
         frontLeftPIN1 = Controller.GPIO.provisionDigitalOutputPin(RaspiPin.getPinByAddress(frontAxisPins[0]), PinState.HIGH);
         frontLeftPIN2 = Controller.GPIO.provisionDigitalOutputPin(RaspiPin.getPinByAddress(frontAxisPins[1]), PinState.LOW);
-        //rontLeftPIN3 = Controller.GPIO.provisionDigitalOutputPin(RaspiPin.getPinByAddress(frontAxisPins[2]), PinState.LOW);
         frontLeftPIN3 = Controller.GPIO.provisionPwmOutputPin(RaspiPin.getPinByAddress(frontAxisPins[2]));
-        //com.pi4j.wiringpi.SoftPwm.softPwmCreate(frontAxisPins[2], 0, 100);
         
         frontRightPIN1 = Controller.GPIO.provisionDigitalOutputPin(RaspiPin.getPinByAddress(frontAxisPins[3]), PinState.HIGH);
         frontRightPIN2 = Controller.GPIO.provisionDigitalOutputPin(RaspiPin.getPinByAddress(frontAxisPins[4]), PinState.LOW);
-        //frontRightPIN3 = Controller.GPIO.provisionDigitalOutputPin(RaspiPin.getPinByAddress(frontAxisPins[5]), PinState.LOW);
         frontRightPIN3 = Controller.GPIO.provisionPwmOutputPin(RaspiPin.getPinByAddress(frontAxisPins[5]));
-        //com.pi4j.wiringpi.SoftPwm.softPwmCreate(frontAxisPins[5], 0, 100);
     }
     
     private void assignPinsToRearAxis(int[] rearAxisPins)
@@ -122,8 +98,6 @@ public class EngineResponder implements EngineListener {
     public void onStop()
     {
         speed = 0;
-        //if (engineRunner != null)
-        //    engineRunner.stop();
         
         switch (drivenAxis)
         {
@@ -150,18 +124,11 @@ public class EngineResponder implements EngineListener {
     {
         frontLeftPIN1.setState(PinState.HIGH);
         frontLeftPIN2.setState(PinState.LOW);
-        //frontLeftPIN3.setState(PinState.LOW);
         frontLeftPIN3.setPwm(0);
         
         frontRightPIN1.setState(PinState.HIGH);
         frontRightPIN2.setState(PinState.LOW);
-        //frontRightPIN3.setState(PinState.LOW);
         frontRightPIN3.setPwm(0);
-        
-        //engineRunner.stop();
-        
-        //com.pi4j.wiringpi.SoftPwm.softPwmWrite(1, 0);
-        //com.pi4j.wiringpi.SoftPwm.softPwmWrite(26, 0);
     }
     
     private void stopRearAxis()
@@ -182,8 +149,6 @@ public class EngineResponder implements EngineListener {
             onStop();
         else
             speed -= 10;
-        
-        //engineRunner.setSpeed(speed);
         return speed;
     }
     
@@ -224,52 +189,32 @@ public class EngineResponder implements EngineListener {
     @Override
     public int onSpeedUp()
     {        
-        //if (speed < 512)
-        //    speed += 30;
-        //else
-        //    speed = 100;
-        //speed = 100;
+
         if (speed == 0)
         {
-            /*
-            engineRunner = EngineRunner.getInstance(
-                new GpioPinDigitalOutput[] { frontLeftPIN1, frontLeftPIN2, frontLeftPIN3, frontRightPIN1, frontRightPIN2, frontRightPIN3 },
-                drivenAxis);
-            engineRunner.start();
-            engineRunner.setSpeed(30);
-            */
+
             frontLeftPIN1.setState(PinState.HIGH);
             frontLeftPIN2.setState(PinState.LOW);
-            //frontLeftPIN3.setPwm(512);
 
             frontRightPIN1.setState(PinState.HIGH);
             frontRightPIN2.setState(PinState.LOW);
-            //frontRightPIN3.setPwm(512);
         } else if (speed == 512)
         {
-            //engineRunner.setSpeed(60);
             frontLeftPIN1.setState(PinState.HIGH);
             frontLeftPIN2.setState(PinState.LOW);
-            //frontLeftPIN3.setPwm(768);
 
             frontRightPIN1.setState(PinState.HIGH);
             frontRightPIN2.setState(PinState.LOW);
-            //frontRightPIN3.setPwm(768);
         }
         else {
-            //engineRunner.stop();
             frontLeftPIN1.setState(PinState.HIGH);
             frontLeftPIN2.setState(PinState.LOW);
-            //frontLeftPIN3.setState(PinState.HIGH);
-            //frontLeftPIN3.setPwm(1000);
 
             frontRightPIN1.setState(PinState.HIGH);
             frontRightPIN2.setState(PinState.LOW);
-            //frontRightPIN3.setState(PinState.HIGH);
-            //frontRightPIN3.setPwm(1000);
+
         }
-        
-        //speed = frontLeftPIN3.getPwm();
+
         
         return speed;
     }
@@ -293,13 +238,11 @@ public class EngineResponder implements EngineListener {
     {
         frontLeftPIN1.setState(PinState.LOW);
         frontLeftPIN2.setState(PinState.HIGH);
-        //frontLeftPIN3.setState(PinState.HIGH);
-        //frontLeftPIN3.setPwm(1024);
+
         
         frontRightPIN1.setState(PinState.LOW);
         frontRightPIN2.setState(PinState.HIGH);
-        //frontRightPIN3.setState(PinState.HIGH);
-        //frontRightPIN3.setPwm(1024);
+
     }
     
     private void reverseRear()
@@ -316,9 +259,7 @@ public class EngineResponder implements EngineListener {
     @Override
     public void onForward()
     {
-        //pin1.setState(PinState.HIGH);
-        //pin2.setState(PinState.LOW);
-        //pin3.setState(PinState.HIGH);
+
     }
     
     

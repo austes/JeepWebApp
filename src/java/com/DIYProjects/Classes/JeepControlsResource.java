@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.DIYProjects.Classes;
 
 import javax.ws.rs.core.Context;
@@ -16,11 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- * REST Web Service
- *
- * @author Mindaugas Liogys
- */
+
 @Path("/jeep")
 public class JeepControlsResource {
 
@@ -29,9 +21,7 @@ public class JeepControlsResource {
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of JeepControlsResource
-     */
+
     public JeepControlsResource() {
         jeep = Jeep.getInstance();
     }
@@ -151,11 +141,7 @@ public class JeepControlsResource {
         }
     }
     
-    /**
-     * POST method for creating an instance of JeepControlResource
-     * @param content representation for the new resource
-     * @return an HTTP response with content of the created resource
-     */
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -164,9 +150,7 @@ public class JeepControlsResource {
         return Response.created(context.getAbsolutePath()).build();
     }
 
-    /**
-     * Sub-resource locator method for {id}
-     */
+
     @Path("{id}")
     public JeepControlResource getJeepControlResource(@PathParam("id") String id) {
         return JeepControlResource.getInstance(id);
