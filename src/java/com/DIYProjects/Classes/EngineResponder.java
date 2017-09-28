@@ -8,12 +8,10 @@ public class EngineResponder implements EngineListener {
     private int speed = 0;
     private GpioPinDigitalOutput frontLeftPIN1;
     private GpioPinDigitalOutput frontLeftPIN2;
-    //private GpioPinDigitalOutput frontLeftPIN3;
     private GpioPinPwmOutput frontLeftPIN3;
     
     private GpioPinDigitalOutput frontRightPIN1;
     private GpioPinDigitalOutput frontRightPIN2;
-    //private GpioPinDigitalOutput frontRightPIN3;
     private GpioPinPwmOutput frontRightPIN3;
     
     private GpioPinDigitalOutput rearLeftPIN1;
@@ -261,7 +259,38 @@ public class EngineResponder implements EngineListener {
     {
 
     }
-    
+
+    public void turnLeft ()
+    {
+        frontLeftPIN3.setState(PinState.LOW);
+        rearLeftPIN3.setState(PinState.LOW);
+        frontRightPIN3.setState(PinState.HIGH);
+        rearRightPIN3.setState(PinState.HIGH);
+        
+        frontRightPIN3.setPwm(20);
+        reareRightPIN3.setPwm(20);
+
+        rearRightPIN1.setState(PinState.LOW);
+        rearRightPIN2.setState(PinState.HIGH);
+        frontRightPIN1.setState(PinState.LOW);
+        frontRightPIN2.setState(PinState.HIGH);
+    }
+
+    public void turnRight ()
+    {
+        frontRightPIN3.setState(PinState.LOW);
+        rearRightPIN3.setState(PinState.LOW);
+        frontLeftPIN3.setState(PinState.HIGH);
+        rearLeftPIN3.setState(PinState.HIGH);
+
+        frontLeftPIN3.setPwm(20);
+        reareLeftPIN3.setPwm(20);
+
+        rearLeftPIN1.setState(PinState.LOW);
+        rearLeftPIN2.setState(PinState.HIGH);
+        frontLeftPIN1.setState(PinState.LOW);
+        frontLeftPIN2.setState(PinState.HIGH);
+    }
     
 }
 
