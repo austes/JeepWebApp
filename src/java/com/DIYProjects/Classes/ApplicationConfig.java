@@ -3,10 +3,7 @@ package com.DIYProjects.Classes;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
-/**
- *
- * @author root
- */
+
 @javax.ws.rs.ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
 
