@@ -183,6 +183,20 @@ public class EngineResponder implements EngineListener {
         return speedInNumbers;
       }
 
+
+    private int speedUpReverse (int speedInNumbers) {
+        rearLeftPIN1.setState(PinState.LOW);
+        rearLeftPIN2.setState(PinStateHIGH);
+
+        rearRightPIN1.setState(PinState.LOW);
+        rearRightPIN2.setState(PinState.HIGH);
+
+        rearLeftPIN3.setPwm(speedInNumbers);
+        rearRightPIN3.setPwm(speedInNumbers);
+        return speedInNumbers;
+    }
+
+
     
     @Override
     public int onSpeedUp()
@@ -257,7 +271,6 @@ public class EngineResponder implements EngineListener {
     @Override
     public void onForward()
     {
-
     }
 
     public void turnLeft ()
@@ -290,6 +303,7 @@ public class EngineResponder implements EngineListener {
         frontLeftPIN1.setState(PinState.LOW);
         frontLeftPIN2.setState(PinState.HIGH);
     }
+
     
 }
 
